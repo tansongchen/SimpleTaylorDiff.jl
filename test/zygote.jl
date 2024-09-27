@@ -6,6 +6,7 @@ import Zygote # use qualified import to avoid conflict with TaylorDiff
     some_number = 0.7
     some_numbers = [0.3 0.4 0.1;]
     for f in (exp, log, sqrt, sin, asin, sinh, asinh, x -> x^3)
+        println("Testing $f")
         @test Zygote.gradient(derivative, f, some_number, 2)[2] ≈
               derivative(f, some_number, 3)
         @test Zygote.jacobian(broadcast, derivative, f, some_numbers, 2)[3] ≈
